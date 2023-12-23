@@ -8,22 +8,24 @@ class Intro {
   required this.description,
 });
 
+
   final List<Intro> demoData = [
 
-  Intro(
-     images: "assets/images/",
-    tittle: 'Clinic Consultation',
-    description: 'Skip waiting time and schedule your clinic appointment in seconds.',
-),
     Intro(
-     images: "assets/images/",
-    tittle: 'Video Consultation',
-    description: 'Video call with our best doctors with video consultation.',
-),
+      images: "assets/icon/intro_1.png",
+      tittle: 'Clinic Consultation',
+      description: 'Skip waiting time and schedule your clinic appointment in seconds.',
+    ),
     Intro(
-     images: "assets/images/",
-    tittle: 'Nearest Clinics',
-    description: 'Book Appointment with doctors available near you.',
-),
-];
+      images: "assets/icon/intro_2.png",
+      tittle: 'Video Consultation',
+      description: 'Video call with our best doctors with video consultation.',
+    ),
+    Intro(
+      images: "assets/icon/intro_3.png",
+      tittle: 'Nearest Clinics',
+      description: 'Book Appointment with doctors available near you.',
+    ),
+  ];
+
 }

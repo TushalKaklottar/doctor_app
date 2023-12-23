@@ -17,13 +17,6 @@ class SplashController extends GetxController {
       bool isLogin = pref.getBool("isLogin") ?? false;
       String user = pref.getString("user") ?? "patient";
       String savedName = pref.getString("name") ?? "";
-      //
-      // isLogin
-      //     ? user == "patient"
-      //     ? Get.off(HomePage(number: number,))
-      //     : Get.off(DoctorHome(number: number))
-      //     : Get.off(const OnBoardingScreen());
-
 
       if(isLogin) {
         if(user == "patient") {
