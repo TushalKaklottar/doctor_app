@@ -17,23 +17,24 @@ import 'export_app.dart';
 }
 
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: primary,
-        statusBarBrightness: Brightness.light,
-      )
-    );
+          const SystemUiOverlayStyle(
+            statusBarColor: primary,
+            statusBarBrightness: Brightness.light,
+          )
+        );
     return ScreenUtilInit(
       designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_,child) {
-          return MaterialApp(
+          return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
               useMaterial3: true,
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
             home: child,
           );
         },
-      // child: ,
+      child: Splash(),
     );
   }
 }
