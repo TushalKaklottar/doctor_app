@@ -13,10 +13,10 @@ class IntroController extends GetxController {
     pageController = PageController(initialPage: 0);
 
     timer = Timer.periodic(5.seconds, (timer) {
-      if (pageIndex < 3) {
-        pageIndex++;
+      if (pageIndex.value < 3) {
+        pageIndex.value++;
       } else {
-        pageIndex = 0.obs;
+        pageIndex.value = 0;
       }
 
       pageController.animateToPage(
@@ -31,5 +31,6 @@ class IntroController extends GetxController {
     super.onClose();
     pageController.dispose();
     timer.cancel();
+    super.dispose();
   }
 }

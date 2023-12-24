@@ -1,5 +1,4 @@
 import 'package:doctor_app/export_app.dart';
-import '';
 
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);

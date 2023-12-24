@@ -25,7 +25,7 @@ class SplashController extends GetxController {
           Get.to(DoctorHome(number: number));
         }
       } else {
-        Get.to(const OnBoardingScreen());
+        Get.to(OnBoardingScreen());
       }
     });
   }
