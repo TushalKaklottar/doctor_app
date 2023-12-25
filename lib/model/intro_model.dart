@@ -1,27 +1,27 @@
 class Intro {
 
-  final String images, tittle , description;
+  final String image, title , description;
 
       Intro({
-  required this.images,
-  required this.tittle,
+  required this.image,
+  required this.title,
   required this.description,
 });
 }
 final List<Intro> demoData = [
   Intro(
-    images: "assets/icon/intro_1.png",
-    tittle: 'Clinic Consultation',
-    description: 'Skip waiting time and schedule your clinic appointment in seconds.',
+    image: "assets/icon/intro1.png",
+    title: "Clinic Consultation",
+    description: "Skip waiting time and schedule your clinic appointment in seconds.",
   ),
   Intro(
-    images: "assets/icon/intro_2.png",
-    tittle: 'Video Consultation',
-    description: 'Video call with our best doctors with video consultation.',
+    image: "assets/icon/intro2.png",
+    title: "Video Consultation",
+    description: "Video call with our best doctors with video consultation.",
   ),
   Intro(
-    images: "assets/icon/intro_3.png",
-    tittle: 'Nearest Clinics',
-    description: 'Book Appointment with doctors available near you.',
+    image: "assets/icon/intro3.png",
+    title: "Nearest Clinics",
+    description: "Book Appointment with doctors available near you.",
   ),
 ];

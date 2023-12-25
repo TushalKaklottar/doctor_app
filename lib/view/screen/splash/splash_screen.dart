@@ -56,15 +56,6 @@ class Splash extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text(
-                        "Always there for YOU",
-                        style: GoogleFonts.arima(
-                          color: textColor,
-                          letterSpacing: 1.2.sp,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )
                     ],
                   ),
                 ),

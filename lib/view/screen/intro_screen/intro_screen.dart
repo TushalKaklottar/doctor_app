@@ -1,7 +1,7 @@
-
 import 'package:doctor_app/controller/intro/intro_controller.dart';
 import 'package:doctor_app/export_app.dart';
 import 'package:doctor_app/model/intro_model.dart';
+import '../user_choice.dart';
 
 class IntroScreen  extends StatelessWidget {
     IntroScreen ({super.key});
@@ -17,16 +17,7 @@ class IntroScreen  extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[
-                Color.fromARGB(255, 30, 99, 246),
-                Color.fromARGB(230, 41, 101, 231),
-                Color.fromARGB(255, 66, 129, 223),
-                Color.fromARGB(199, 60, 125, 215),
-                Color.fromARGB(197, 55, 112, 202),
-                Color.fromARGB(232, 95, 145, 216),
-                Color.fromARGB(255, 102, 158, 223),
-                Color.fromARGB(240, 128, 171, 232),
-              ],
+              colors: ColorConstants.customColors,
             tileMode: TileMode.mirror,
           ),
         ),
@@ -35,15 +26,14 @@ class IntroScreen  extends StatelessWidget {
             Expanded(
                 child: PageView.builder(
                   onPageChanged: (index) {
-                    print("Page :$index");
                     _introController.pageIndex.value  = index;
                   },
                     itemCount: demoData.length,
                   controller: _introController.pageController,
                     itemBuilder: (context,index) => OnBoardContent(
-                      images: demoData[index].tittle,
-                      tittle: demoData[index].description,
-                      description: demoData[index].images,
+                      title: demoData[index].title,
+                      description: demoData[index].description,
+                      image: demoData[index].image,
                     ),
                 ),
             ),
@@ -64,7 +54,44 @@ class IntroScreen  extends StatelessWidget {
                       ),
                     ],
                   ),
-              )
+              ),
+            ),
+            Text(
+                "By proceeding you agree to our Privacy Policy.",
+               textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                color: white,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1,
+                height: 1.5,
+              ),
+            ),
+            SizedBox(height: 16.h,),
+            GestureDetector(
+              onTap: () {
+                Get.to(() => const UserPage());
+              },
+              child: Container(
+                margin: EdgeInsets.only(bottom: 15.h),
+                height: 45.h,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Text(
+                    "Login",
+                    style: GoogleFonts.poppins(
+                      color: blue1,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      letterSpacing: 0.6
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
         ),
@@ -75,14 +102,14 @@ class IntroScreen  extends StatelessWidget {
 
 class OnBoardContent extends StatelessWidget {
    OnBoardContent({
-    Key? key,
-    required this.images,
-    required this.tittle,
+    super.key,
+    required this.image,
+    required this.title,
     required this.description
-  }) : super(key: key);
+  });
 
-  String images;
-  String tittle;
+  String image;
+  String title;
   String description;
 
   @override
@@ -91,16 +118,30 @@ class OnBoardContent extends StatelessWidget {
       children: [
         const Spacer(),
         Text(
-          tittle,
-          style: GoogleFonts.arima(
+          title,
+          style: GoogleFonts.poppins(
             color: white,
-            fontSize: 17,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
             height: 1.5,
-
           ),
-        )
+        ),
+        SizedBox(height: 16.h),
+        Text(
+          description,
+          textAlign: TextAlign.start,
+          style: GoogleFonts.poppins(
+            color: white,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            letterSpacing: 1,
+            height: 1.5,
+          ),
+        ),
+        const Spacer(),
+        Image.asset(image,height: 250),
+        const Spacer(),
       ],
     );
   }
@@ -127,5 +168,3 @@ class DotIndicator extends StatelessWidget {
     );
   }
 }
-
-
