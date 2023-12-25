@@ -1,9 +1,10 @@
+
 import 'package:doctor_app/controller/intro/intro_controller.dart';
 import 'package:doctor_app/export_app.dart';
 import 'package:doctor_app/model/intro_model.dart';
 
-class OnBoardingScreen  extends StatelessWidget {
-   OnBoardingScreen ({super.key});
+class IntroScreen  extends StatelessWidget {
+    IntroScreen ({super.key});
 
   final IntroController _introController = Get.put(IntroController());
 
@@ -35,9 +36,10 @@ class OnBoardingScreen  extends StatelessWidget {
                 child: PageView.builder(
                   onPageChanged: (index) {
                     print("Page :$index");
-                    _introController.pageIndex.value = index;
+                    _introController.pageIndex.value  = index;
                   },
                     itemCount: demoData.length,
+                  controller: _introController.pageController,
                     itemBuilder: (context,index) => OnBoardContent(
                       images: demoData[index].tittle,
                       tittle: demoData[index].description,
@@ -47,20 +49,22 @@ class OnBoardingScreen  extends StatelessWidget {
             ),
             Padding(
                 padding: EdgeInsets.only(bottom: 16.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ...List.generate(
-                      demoData.length,
-                          (index) => Padding(
-                              padding: EdgeInsets.only(right: 4.sp),
-                            child: DotIndicator(
-                              isActive: index == _introController.pageIndex.value,
-                            ),
-                          ),
+              child: Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ...List.generate(
+                          demoData.length,
+                              (index) => Padding(
+                                  padding: EdgeInsets.only(right: 4.sp),
+                                child: DotIndicator(
+                                  isActive: index == _introController.pageIndex.value,
+                                ),
+                              ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+              )
             )
           ],
         ),
@@ -68,6 +72,7 @@ class OnBoardingScreen  extends StatelessWidget {
     );
   }
 }
+
 class OnBoardContent extends StatelessWidget {
    OnBoardContent({
     Key? key,

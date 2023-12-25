@@ -20,12 +20,12 @@ class SplashController extends GetxController {
 
       if(isLogin) {
         if(user == "patient") {
-          Get.to(HomePage(number: number));
+          Get.offAll(HomePage(number: number));
         } else {
-          Get.to(DoctorHome(number: number));
+          Get.offAll(DoctorHome(number: number));
         }
       } else {
-        Get.to(OnBoardingScreen());
+        Get.offAll(IntroScreen());
       }
     });
   }
