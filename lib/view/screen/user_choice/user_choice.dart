@@ -78,7 +78,7 @@ class UserPage extends StatelessWidget {
                       image: "assets/icon/examination1.png",
                     onTap: () {
                         setUserMode("patient");
-                        Get.to(() => LoginPage());
+                        Get.to(() =>  LoginPage());
                     },
                   ),
                   OptionCard(
@@ -87,7 +87,7 @@ class UserPage extends StatelessWidget {
                       image: "assets/icon/doctor.png",
                     onTap: () {
                         setUserMode("doctor");
-                        Get.to(() => LoginPage());
+                        Get.to(() =>  LoginPage());
                     },
                   ),
                 ],

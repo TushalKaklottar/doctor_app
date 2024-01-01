@@ -1,13 +1,11 @@
+import 'package:doctor_app/controller/login_controller/login_controller.dart';
 import 'package:doctor_app/export_app.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+    LoginPage({Key? key}) : super(key: key);
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+    final LoginController _loginController = Get.put(LoginController());
 
-class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-              padding: EdgeInsets.all(12.sp),
+              padding: EdgeInsets.all(16.sp),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                 customText(
                     "User Login",
                     textColor,
-                    24,
+                    20,
                     FontWeight.w500
                 ),
                 SizedBox(height: 25.h,),
@@ -54,11 +52,38 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
                         12.r,
-                    )
+                    ),
+                    boxShadow: [
+                          BoxShadow(
+                              color: const Color.fromARGB(255, 89, 89, 89),
+                              spreadRadius: 3.sp,
+                              blurRadius: 2.sp,
+                              blurStyle: BlurStyle.outer,
+                              offset: const Offset(0,0)
+                          ),
+                    ]
+                  ),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _loginController.textEditingController,
+                        onChanged: _loginController.onMobileChanged,
+                        keyboardType: TextInputType.phone,
+                        style: const TextStyle(color: textColor),
+                        decoration: InputDecoration(
+                          label: Text('Mobile No.'),
+                          hintText: 'Enter Mobile No.',
+                          focusColor: textColor,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )
               ],
-
             ),
           ),
         ),
@@ -66,3 +91,5 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+

@@ -29,7 +29,8 @@ class OptionCard extends StatelessWidget {
                 color: white,
                 spreadRadius: 3,
                 blurRadius: 2,
-                offset: Offset(0,1)
+                blurStyle: BlurStyle.outer,
+                offset: Offset(0,0)
             )
           ],
           borderRadius: BorderRadius.circular(12.r),
