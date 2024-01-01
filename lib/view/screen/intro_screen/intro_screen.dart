@@ -1,7 +1,4 @@
-import 'package:doctor_app/controller/intro/intro_controller.dart';
 import 'package:doctor_app/export_app.dart';
-import 'package:doctor_app/model/intro_model.dart';
-import '../user_choice/user_choice.dart';
 
 class IntroScreen  extends StatelessWidget {
     IntroScreen ({super.key});

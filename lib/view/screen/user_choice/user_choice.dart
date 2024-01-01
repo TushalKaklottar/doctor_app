@@ -1,6 +1,4 @@
 import 'package:doctor_app/export_app.dart';
-import '../login/login_page.dart';
-import 'component/option_card.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});

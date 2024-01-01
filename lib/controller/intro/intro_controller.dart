@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:doctor_app/export_app.dart';
 
 class IntroController extends GetxController {
