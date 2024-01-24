@@ -7,6 +7,8 @@ class LoginPage extends StatelessWidget {
     LoginPage({Key? key}) : super(key: key);
 
     final LoginController _loginController = Get.put(LoginController());
+    static String verify = "";
+    int? _reasonToken;
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +114,31 @@ class LoginPage extends StatelessWidget {
                         0,
                           () async {
                           CustomWidget().showProgress(context: context);
+                          print(_loginController.mobile);
                           await FirebaseAuth.instance.verifyPhoneNumber(
-                              verificationCompleted: verificationCompleted,
-                              verificationFailed: verificationFailed,
-                              codeSent: codeSent,
+                            timeout: const Duration(seconds: 60),
+                              phoneNumber: _loginController.mobile,
+                              verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
+                              print('inside verification');
+                              },
+                              verificationFailed: (FirebaseAuthException e) {
+                              print(e);
+                              if(e.code == 'invalid-phone-number') {
+                                print("The provided phone number is not valid");
+                              }
+                               print("inside verification failed");
+                              Navigator.pop(context);
+                              },
+                              codeSent: (String verificationId,int? resendToken) {
+                              LoginPage.verify = verificationId;
+                              _reasonToken = resendToken;
+                              print('Login verification ====${LoginPage.verify}');
+                              Navigator.pop(context);
+                              show
+                              Navigator.push(context, route)
+                              },
                               codeAutoRetrievalTimeout: codeAutoRetrievalTimeout
-                          )
+                          );
                           }
                       )
                       ),
