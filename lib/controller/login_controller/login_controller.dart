@@ -6,6 +6,7 @@ class LoginController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
 
   String mobile = "";
+  static String verify = "";
   int? _reasonToken;
 
 

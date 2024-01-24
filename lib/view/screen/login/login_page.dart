@@ -1,3 +1,5 @@
+import 'package:doctor_app/component/custom_wiidget.dart';
+import 'package:doctor_app/component/widget_component.dart';
 import 'package:doctor_app/controller/login_controller/login_controller.dart';
 import 'package:doctor_app/export_app.dart';
 
@@ -12,14 +14,14 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(
-            color: textColor,
+            color: black,
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
           centerTitle: true,
           title: customText(
               "Login",
-              textColor,
+              black,
               16,
               FontWeight.w500,
           ),
@@ -39,7 +41,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 customText(
                     "User Login",
-                    textColor,
+                    black,
                     20,
                     FontWeight.w500
                 ),
@@ -69,16 +71,55 @@ class LoginPage extends StatelessWidget {
                         controller: _loginController.textEditingController,
                         onChanged: _loginController.onMobileChanged,
                         keyboardType: TextInputType.phone,
-                        style: const TextStyle(color: textColor),
+                        style: const TextStyle(color: black),
                         decoration: InputDecoration(
-                          label: Text('Mobile No.'),
+                          label:  Text('Mobile No.',style: GoogleFonts.poppins(),),
                           hintText: 'Enter Mobile No.',
-                          focusColor: textColor,
+                          helperStyle: GoogleFonts.poppins(),
+                          focusColor: black,
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.grey),
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: black,
+                              width: 2.w,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: red,
+                              width: 2.w,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          )
                         ),
+                      ),
+                      SizedBox(height: 20.h,),
+                      Padding(padding: EdgeInsets.all(10.sp),
+                        child: customButton(
+                        45,
+                        double.infinity,
+                        10,
+                        primary,
+                        white,
+                        "Send OTP",
+                        15,
+                        FontWeight.w500,
+                        0,
+                        0,
+                          () async {
+                          CustomWidget().showProgress(context: context);
+                          await FirebaseAuth.instance.verifyPhoneNumber(
+                              verificationCompleted: verificationCompleted,
+                              verificationFailed: verificationFailed,
+                              codeSent: codeSent,
+                              codeAutoRetrievalTimeout: codeAutoRetrievalTimeout
+                          )
+                          }
+                      )
                       ),
                     ],
                   ),
