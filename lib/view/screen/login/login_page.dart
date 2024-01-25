@@ -2,6 +2,7 @@ import 'package:doctor_app/component/custom_wiidget.dart';
 import 'package:doctor_app/component/widget_component.dart';
 import 'package:doctor_app/controller/login_controller/login_controller.dart';
 import 'package:doctor_app/export_app.dart';
+import 'package:doctor_app/view/screen/otp/otp.dart';
 
 class LoginPage extends StatelessWidget {
     LoginPage({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class LoginPage extends StatelessWidget {
     final LoginController _loginController = Get.put(LoginController());
     static String verify = "";
     int? _reasonToken;
+    String mobile = "";
 
   @override
   Widget build(BuildContext context) {
@@ -102,30 +104,33 @@ class LoginPage extends StatelessWidget {
                       SizedBox(height: 20.h,),
                       Padding(padding: EdgeInsets.all(10.sp),
                         child: customButton(
-                        45,
-                        double.infinity,
-                        10,
-                        primary,
-                        white,
-                        "Send OTP",
-                        15,
-                        FontWeight.w500,
-                        0,
-                        0,
+                       45,
+                          double.infinity,
+                          10,
+                          primary,
+                          white,
+                          "Send OTP",
+                          15,
+                          FontWeight.bold,
+                          0,
+                          0,
                           () async {
                           CustomWidget().showProgress(context: context);
-                          print(_loginController.mobile);
+                          print(mobile);
+
                           await FirebaseAuth.instance.verifyPhoneNumber(
                             timeout: const Duration(seconds: 60),
-                              phoneNumber: _loginController.mobile,
+                              phoneNumber: mobile,
                               verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
                               print('inside verification');
                               },
                               verificationFailed: (FirebaseAuthException e) {
                               print(e);
+
                               if(e.code == 'invalid-phone-number') {
                                 print("The provided phone number is not valid");
                               }
+
                                print("inside verification failed");
                               Navigator.pop(context);
                               },
@@ -134,13 +139,45 @@ class LoginPage extends StatelessWidget {
                               _reasonToken = resendToken;
                               print('Login verification ====${LoginPage.verify}');
                               Navigator.pop(context);
-                              show
-                              Navigator.push(context, route)
+                              showToast("OTP Sent");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OTP(
+                                        mobile: mobile,
+                                      ),
+                                  ),
+                              );
                               },
-                              codeAutoRetrievalTimeout: codeAutoRetrievalTimeout
+                              forceResendingToken: _reasonToken,
+                              codeAutoRetrievalTimeout: (String verificationId) {
+                              print(verificationId);
+                              }
                           );
                           }
-                      )
+                      ),
+                      ),
+                      SizedBox(
+                        height: 11.h,
+                      ),
+                      Center(
+                        child: customText(
+                            "By clicking proceed, you agree to our",
+                            primary,
+                            13,
+                            FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Center(
+                        child: customText(
+                          "Terms & Conditions",
+                          primary,
+                          13,
+                          FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),

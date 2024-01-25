@@ -1,4 +1,5 @@
 import 'package:doctor_app/export_app.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CustomWidget{
 
@@ -30,8 +31,20 @@ class CustomWidget{
                 ),
               ),
               onWillPop: () async => false,
-          )
+          );
         }
     );
   }
 }
+
+String savedName = "";
+
+dynamic showToast(String tittle) =>
+    Fluttertoast.showToast(
+        msg: tittle,
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 1,
+      backgroundColor: primary,
+      textColor: white,
+      fontSize: 16.0,
+    );
