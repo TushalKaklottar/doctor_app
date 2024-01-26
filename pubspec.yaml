@@ -42,6 +42,7 @@ dependencies:
   google_fonts: any
   firebase_auth: ^4.15.3
   fluttertoast: ^8.2.4
+  flutter_otp_text_field: ^1.1.1
 
 
 dev_dependencies:

@@ -12,6 +12,7 @@ class LoginPage extends StatelessWidget {
     int? _reasonToken;
     String mobile = "";
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -104,20 +105,21 @@ class LoginPage extends StatelessWidget {
                       SizedBox(height: 20.h,),
                       Padding(padding: EdgeInsets.all(10.sp),
                         child: customButton(
-                       45,
+                       50,
                           double.infinity,
                           10,
                           primary,
-                          white,
-                          "Send OTP",
-                          15,
-                          FontWeight.bold,
+                          Colors.white,
+                          'Send OTP',
+                          13,
+                          FontWeight.w400,
                           0,
                           0,
                           () async {
                           CustomWidget().showProgress(context: context);
-                          print(mobile);
 
+                          mobile = _loginController.textEditingController.text;
+                          print(mobile);
                           await FirebaseAuth.instance.verifyPhoneNumber(
                             timeout: const Duration(seconds: 60),
                               phoneNumber: mobile,
@@ -189,6 +191,18 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+}
+
+bool isMobileNumber(String phoneNumber) {
+  String regXPattern = r'^(?:[+0][1-9])?[0-9]{10,12}$';
+  var refExp = RegExp(regXPattern);
+
+  if(phoneNumber.isEmpty) {
+    return false;
+  } else if(refExp.hasMatch(phoneNumber)) {
+    return true;
+  }
+  return false;
 }
 
 
