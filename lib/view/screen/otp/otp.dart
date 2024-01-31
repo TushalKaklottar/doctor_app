@@ -1,3 +1,5 @@
+import 'package:doctor_app/component/custom_wiidget.dart';
+import 'package:doctor_app/controller/otp/otp_controller.dart';
 import 'package:doctor_app/export_app.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
@@ -5,15 +7,38 @@ class OTP extends StatefulWidget {
   final String mobile;
   const OTP({super.key,required this.mobile});
 
+
+
   @override
   State<OTP> createState() => _OTPState();
 }
 
 class _OTPState extends State<OTP> {
 
-
+  // final OtpController otpController = Get.put(OtpController());
   int resendOn = 0;
   var code = "";
+  int? _resendToken;
+
+  int start = 59;
+  bool wait = false;
+  void startTimer() {
+    const one = Duration(seconds: 1);
+    Timer _timer = Timer.periodic(one, (timer) {
+      if (start == 0) {
+        setState(() {
+          timer.cancel();
+          resendOn = 1;
+          wait = false;
+        });
+      } else {
+        setState(() {
+          start--;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -113,10 +138,41 @@ class _OTPState extends State<OTP> {
                         ),
                         InkWell(
                           onTap: resendOn == 1
-                          ? () async {
-
-                          }
-                        ),
+                              ? () async {
+                            setState(() {
+                              start = 59;
+                              resendOn = 0;
+                            });
+                            CustomWidget().showProgress(context: context);
+                            await FirebaseAuth.instance.verifyPhoneNumber(
+                              timeout: const Duration(seconds: 60),
+                                verificationCompleted: (
+                                    PhoneAuthCredential phoneAuthCredential)
+                                async {
+                                Navigator.pop(context);
+                                print("inside verification");
+                                },
+                                verificationFailed: (FirebaseAuthException e) {
+                                Navigator.pop(context);
+                                },
+                                codeSent: (String verificationId, int? resendToken) {
+                                Navigator.pop(context);
+                                showToast("Code Sent Successfully");
+                                startTimer();
+                                LoginPage.verify = verificationId;
+                                _resendToken = resendToken;
+                                // print(object)
+                                },
+                                forceResendingToken: _resendToken,
+                                codeAutoRetrievalTimeout: (String verificationId) {
+                                print(verificationId);
+                                }
+                            );
+                          } : () {},
+                          child: Text(
+                            'Resend'
+                          ),
+                        )
                       ],
                     ),
                   ],

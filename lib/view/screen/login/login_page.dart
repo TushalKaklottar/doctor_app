@@ -4,13 +4,31 @@ import 'package:doctor_app/controller/login_controller/login_controller.dart';
 import 'package:doctor_app/export_app.dart';
 import 'package:doctor_app/view/screen/otp/otp.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
     LoginPage({Key? key}) : super(key: key);
 
-    final LoginController _loginController = Get.put(LoginController());
     static String verify = "";
-    int? _reasonToken;
-    String mobile = "";
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  final TextEditingController _controller = TextEditingController();
+
+
+  @override
+  void initState() {
+    _controller.text = "+91";
+    super.initState();
+  }
+
+  int? _reasonToken;
+  String mobile = "";
+
+    // final LoginController _loginController = Get.put(LoginController());
 
 
   @override
@@ -73,8 +91,12 @@ class LoginPage extends StatelessWidget {
                   child: Column(
                     children: [
                       TextFormField(
-                        controller: _loginController.textEditingController,
-                        onChanged: _loginController.onMobileChanged,
+                        controller: _controller,
+                        onChanged: (value) {
+                          setState(() {
+                            mobile = value;
+                          });
+                        },
                         keyboardType: TextInputType.phone,
                         style: const TextStyle(color: black),
                         decoration: InputDecoration(
@@ -118,11 +140,11 @@ class LoginPage extends StatelessWidget {
                           () async {
                           CustomWidget().showProgress(context: context);
 
-                          mobile = _loginController.textEditingController.text;
-                          print(mobile);
+                          // mobile = _loginController.textEditingController.text;
+                          // print(mobile);
                           await FirebaseAuth.instance.verifyPhoneNumber(
                             timeout: const Duration(seconds: 60),
-                              phoneNumber: mobile,
+                              // phoneNumber: mobile,
                               verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
                               print('inside verification');
                               },
@@ -138,7 +160,7 @@ class LoginPage extends StatelessWidget {
                               },
                               codeSent: (String verificationId,int? resendToken) {
                               LoginPage.verify = verificationId;
-                              _reasonToken = resendToken;
+                              // _reasonToken = resendToken;
                               print('Login verification ====${LoginPage.verify}');
                               Navigator.pop(context);
                               showToast("OTP Sent");
@@ -151,7 +173,7 @@ class LoginPage extends StatelessWidget {
                                   ),
                               );
                               },
-                              forceResendingToken: _reasonToken,
+                              // forceResendingToken: _reasonToken,
                               codeAutoRetrievalTimeout: (String verificationId) {
                               print(verificationId);
                               }
