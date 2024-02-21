@@ -143,6 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                                 print(e);
                                 if(e.code == 'invalid-phone-number') {
                                   print('');
+                                  print('');
                                 }
                                 },
                                 codeSent: codeSent,
