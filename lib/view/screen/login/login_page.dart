@@ -126,60 +126,93 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: 20.h,),
                       Padding(padding: EdgeInsets.all(10.sp),
-                        child: customButton(
-                       50,
-                          double.infinity,
-                          10,
-                          primary,
-                          Colors.white,
-                          'Send OTP',
-                          13,
-                          FontWeight.w400,
-                          0,
-                          0,
-                          () async {
-                          CustomWidget().showProgress(context: context);
+                        child: GestureDetector(
+                          onTap: () async {
 
-                          // mobile = _loginController.textEditingController.text;
-                          // print(mobile);
-                          await FirebaseAuth.instance.verifyPhoneNumber(
-                            timeout: const Duration(seconds: 60),
-                              // phoneNumber: mobile,
-                              verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
-                              print('inside verification');
-                              },
-                              verificationFailed: (FirebaseAuthException e) {
-                              print(e);
-
-                              if(e.code == 'invalid-phone-number') {
-                                print("The provided phone number is not valid");
-                              }
-
-                               print("inside verification failed");
-                              Navigator.pop(context);
-                              },
-                              codeSent: (String verificationId,int? resendToken) {
-                              LoginPage.verify = verificationId;
-                              // _reasonToken = resendToken;
-                              print('Login verification ====${LoginPage.verify}');
-                              Navigator.pop(context);
-                              showToast("OTP Sent");
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OTP(
-                                        mobile: mobile,
-                                      ),
-                                  ),
-                              );
-                              },
-                              // forceResendingToken: _reasonToken,
-                              codeAutoRetrievalTimeout: (String verificationId) {
-                              print(verificationId);
-                              }
-                          );
-                          }
-                      ),
+                            CustomWidget().showProgress(context: context);
+                            print(mobile);
+                            await FirebaseAuth.instance.verifyPhoneNumber(
+                              timeout: const Duration(seconds: 60),
+                                phoneNumber: mobile,
+                                verificationCompleted: (
+                                    PhoneAuthCredential phoneAuthCredential
+                                ) async {
+                                print("inside verification");
+                                },
+                                verificationFailed: (FirebaseAuthException e) {
+                                print(e);
+                                if(e.code == 'invalid-phone-number') {
+                                  print('');
+                                }
+                                },
+                                codeSent: codeSent,
+                                codeAutoRetrievalTimeout: codeAutoRetrievalTimeout
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 15.h),
+                            height: 45.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: primary,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Login",
+                                style: GoogleFonts.poppins(
+                                    color: white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    letterSpacing: 0.6
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      //     () async {
+                      //     CustomWidget().showProgress(context: context);
+                      //
+                      //     // mobile = _loginController.textEditingController.text;
+                      //     // print(mobile);
+                      //     await FirebaseAuth.instance.verifyPhoneNumber(
+                      //       timeout: const Duration(seconds: 60),
+                      //         // phoneNumber: mobile,
+                      //         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
+                      //         print('inside verification');
+                      //         },
+                      //         verificationFailed: (FirebaseAuthException e) {
+                      //         print(e);
+                      //
+                      //         if(e.code == 'invalid-phone-number') {
+                      //           print("The provided phone number is not valid");
+                      //         }
+                      //
+                      //          print("inside verification failed");
+                      //         Navigator.pop(context);
+                      //         },
+                      //         codeSent: (String verificationId,int? resendToken) {
+                      //         LoginPage.verify = verificationId;
+                      //         // _reasonToken = resendToken;
+                      //         print('Login verification ====${LoginPage.verify}');
+                      //         Navigator.pop(context);
+                      //         showToast("OTP Sent");
+                      //         Navigator.push(
+                      //             context,
+                      //             MaterialPageRoute(
+                      //                 builder: (context) => OTP(
+                      //                   mobile: mobile,
+                      //                 ),
+                      //             ),
+                      //         );
+                      //         },
+                      //         // forceResendingToken: _reasonToken,
+                      //         codeAutoRetrievalTimeout: (String verificationId) {
+                      //         print(verificationId);
+                      //         }
+                      //     );
+                      //     }
+                      // ),
                       ),
                       SizedBox(
                         height: 11.h,
