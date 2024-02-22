@@ -12,7 +12,12 @@
           "package_name": "com.example.doctor_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "529367803524-eegd47lkq3rt8r7iplv8f9o4012sub7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCFcap0ZJ3WnM5TpbmYuBvvua6sCeQgnOk"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529367803524-eegd47lkq3rt8r7iplv8f9o4012sub7d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "529367803524-neh353mburk6u7pols6jcp2u86j4flhm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.doctorApp"
+              }
+            }
+          ]
         }
       }
     }

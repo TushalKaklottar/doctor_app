@@ -143,11 +143,25 @@ class _LoginPageState extends State<LoginPage> {
                                 print(e);
                                 if(e.code == 'invalid-phone-number') {
                                   print('');
-                                  print('');
                                 }
                                 },
-                                codeSent: codeSent,
-                                codeAutoRetrievalTimeout: codeAutoRetrievalTimeout
+                                codeSent: (String verification, int? resendToken) {
+                                LoginPage.verify = verification;
+                                _reasonToken = resendToken;
+                                print('Login verification===${LoginPage.verify}');
+                                Navigator.pop(context);
+                                showToast("OTP Sent");
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OTP(mobile: mobile),
+                                    )
+                                );
+                                },
+                                forceResendingToken: _reasonToken,
+                                codeAutoRetrievalTimeout: (String verificationId) {
+                                print(verificationId);
+                                }
                             );
                           },
                           child: Container(
@@ -160,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: Center(
                               child: Text(
-                                "Login",
+                                "Send OTP",
                                 style: GoogleFonts.poppins(
                                     color: white,
                                     fontWeight: FontWeight.w600,
@@ -171,49 +185,6 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                      //     () async {
-                      //     CustomWidget().showProgress(context: context);
-                      //
-                      //     // mobile = _loginController.textEditingController.text;
-                      //     // print(mobile);
-                      //     await FirebaseAuth.instance.verifyPhoneNumber(
-                      //       timeout: const Duration(seconds: 60),
-                      //         // phoneNumber: mobile,
-                      //         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
-                      //         print('inside verification');
-                      //         },
-                      //         verificationFailed: (FirebaseAuthException e) {
-                      //         print(e);
-                      //
-                      //         if(e.code == 'invalid-phone-number') {
-                      //           print("The provided phone number is not valid");
-                      //         }
-                      //
-                      //          print("inside verification failed");
-                      //         Navigator.pop(context);
-                      //         },
-                      //         codeSent: (String verificationId,int? resendToken) {
-                      //         LoginPage.verify = verificationId;
-                      //         // _reasonToken = resendToken;
-                      //         print('Login verification ====${LoginPage.verify}');
-                      //         Navigator.pop(context);
-                      //         showToast("OTP Sent");
-                      //         Navigator.push(
-                      //             context,
-                      //             MaterialPageRoute(
-                      //                 builder: (context) => OTP(
-                      //                   mobile: mobile,
-                      //                 ),
-                      //             ),
-                      //         );
-                      //         },
-                      //         // forceResendingToken: _reasonToken,
-                      //         codeAutoRetrievalTimeout: (String verificationId) {
-                      //         print(verificationId);
-                      //         }
-                      //     );
-                      //     }
-                      // ),
                       ),
                       SizedBox(
                         height: 11.h,

@@ -45,12 +45,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBli8c7N6SS8PB_DvUcXzlScF7K5MFP4jc',
-    appId: '1:529367803524:web:54a1b2dcc9c91a034204d1',
+    appId: '1:529367803524:web:f54a6fbdc78580d14204d1',
     messagingSenderId: '529367803524',
     projectId: 'doctor-app-29fa4',
     authDomain: 'doctor-app-29fa4.firebaseapp.com',
     storageBucket: 'doctor-app-29fa4.appspot.com',
-    measurementId: 'G-FWRRCJMZD4',
+    measurementId: 'G-985T6BWEGT',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '529367803524',
     projectId: 'doctor-app-29fa4',
     storageBucket: 'doctor-app-29fa4.appspot.com',
+    iosClientId: '529367803524-neh353mburk6u7pols6jcp2u86j4flhm.apps.googleusercontent.com',
     iosBundleId: 'com.example.doctorApp',
   );
 
@@ -76,6 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '529367803524',
     projectId: 'doctor-app-29fa4',
     storageBucket: 'doctor-app-29fa4.appspot.com',
+    iosClientId: '529367803524-neh353mburk6u7pols6jcp2u86j4flhm.apps.googleusercontent.com',
     iosBundleId: 'com.example.doctorApp',
   );
 }
